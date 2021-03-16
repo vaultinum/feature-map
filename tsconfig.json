@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2018",
+    "lib": [
+      "esnext"
+    ],
+    "declaration": true,
+  },
+  "compileOnSave": true
+}

@@ -1,0 +1,28 @@
+{
+  "name": "feature-map",
+  "version": "1.0.0",
+  "description": "Describe your product features and link them to your tests",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dedent": "^0.7.0",
+    "indent-string": "^4.0.0",
+    "lodash": "^4.17.21",
+    "typescript": "^4.2.3",
+    "typescript-interface-generator": "0.0.3",
+    "yaml": "^1.10.2"
+  },
+  "devDependencies": {
+    "@types/dedent": "^0.7.0",
+    "@types/jest": "^26.0.20",
+    "@types/lodash": "^4.14.168",
+    "@types/node": "^14.14.35",
+    "@types/yaml": "^1.9.7",
+    "jest": "^26.6.3"
+  }
+}
