@@ -1,15 +1,16 @@
 {
-  "name": "feature-map",
+  "name": "@vaultinum/feature-map",
   "version": "1.0.0",
   "description": "Describe your product features and link them to your tests",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node index.js"
+    "feature-map": "node cli.js --out test"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "commander": "^7.1.0",
     "dedent": "^0.7.0",
     "indent-string": "^4.0.0",
     "lodash": "^4.17.21",
@@ -24,5 +25,8 @@
     "@types/node": "^14.14.35",
     "@types/yaml": "^1.9.7",
     "jest": "^26.6.3"
+  },
+  "bin": {
+    "feature-map": "./cli.js"
   }
 }

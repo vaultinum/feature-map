@@ -1,0 +1,36 @@
+productName: Example product
+description: This product is used for demp purpose only
+features: 
+    Authentication:
+        features: 
+            Login page:
+                features:
+                    Login:
+                        description: A registered user can login using his email/password providing access to the private pages
+                        criticity: high
+                    Remember me:
+                        description: If selected the session of a user will always be kept alive
+                        criticity: low
+                    Forgot password:
+                        description: A user can easily ask to reset his password by simply providing his email
+                        criticity: medium
+            Register page:
+                features:
+                    Register:
+                        description: A unregitered user can register using the register form
+                        criticity: high
+                    Terms & conditions:
+                        description: A terms and conditions page is available and needs to be reviewed before registering
+                        criticity: low
+    Main application:
+        features: 
+            Logout:
+                criticity: high
+            Account management:
+                features: 
+                    Account settings:
+                        description: A user can update account realted information
+                        criticity: low
+                    User profile:
+                        description: A user can edit his preferences
+                        criticity: low
