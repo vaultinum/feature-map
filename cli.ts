@@ -34,11 +34,15 @@ if(!existsSync(configFilePath)) {
     console.log(`No configuration file provided: using default config`);
 }else{
     console.log(`Using featuremap configuration file: ${configFilePath}`);
-    const configFromFile = readFileSync(configFilePath).toJSON();
+    const configFromFile = JSON.parse(readFileSync(configFilePath).toString());
     config = {
         ...defaultFeatureMapConfig,
         ...configFromFile
     }
+}
+const { debug } = config;
+if(debug) {
+    console.log(`Configuration used: ${JSON.stringify(config, null, 4)}`);
 }
 
 // 2. Ensure featuremap.yaml exits
