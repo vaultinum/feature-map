@@ -18,6 +18,8 @@ jobs:
 
       - name: Install dependencies
         run: npm install
+      - name: Build Feature Map 
+        run: npm run featuremap
       - name: Build
         run: npm run build
       - name: Run tests
