@@ -21,7 +21,7 @@ const defaultFeatureMapConfig: FeatureMapConfig = {
 }
 
 program
-    .option("--config <featuremap config file>", "FeatureMap configuration", "featuremap.config.json")
+    .option("--config <featuremap config file>", "FeatureMap configuration", "./featuremap.config.json")
     .option("--debug", "Display debug information");
 
 program.parse(process.argv);
@@ -34,7 +34,7 @@ if(!existsSync(configFilePath)) {
     console.log(`No configuration file provided: using default config`);
 }else{
     console.log(`Using featuremap configuration file: ${configFilePath}`);
-    const configFromFile = require(configFilePath);
+    const configFromFile = readFileSync(configFilePath).toJSON();
     config = {
         ...defaultFeatureMapConfig,
         ...configFromFile
