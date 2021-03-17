@@ -4,3 +4,4 @@
 *.d.ts
 !jest.config.js
 ExampleProductFeatureMap.*
+featuremap.json

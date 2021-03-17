@@ -1,0 +1,12 @@
+{
+    "debug": true,
+    "featuremap": "./test/featuremap.yaml",
+    "outputFolder": "test",
+    "buildObject" : {
+        "target": "typescript"
+    },
+    "bindTests" : {
+        "target": "jest",
+        "inputFile": "jest-results.json"
+    }
+}

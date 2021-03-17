@@ -1,0 +1,38 @@
+{
+    "$id": "https://raw.githubusercontent.com/vaultinum/feature-map/main/featuremap.schema.json",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Feature Map",
+    "description": "A feature-map describing the list of features for a given product",
+    "type": "object",
+    "properties": {
+        "debug": {
+            "type": "boolean"
+        },
+        "featuremap": {
+            "type": "string"
+        },
+        "outputFolder": {
+            "type": "string"
+        },
+        "buildObject": {
+            "type": "object",
+            "properties": {
+                "target": {
+                    "type": "string"
+                }      
+            }
+        },
+        "bindTests": {
+            "type": "object",
+            "properties": {
+                "target": {
+                    "type": "string"
+                },
+                "inputFile": {
+                    "type": "string"
+                }      
+            }
+        }
+    },
+    "additionalProperties": false
+}

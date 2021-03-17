@@ -3,9 +3,15 @@
   "version": "1.0.0",
   "description": "Describe your product features and link them to your tests",
   "main": "index.js",
+  "types": "index.d.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "build": "tsc",
-    "feature-map": "node cli.js --out test"
+    "featuremap": "node cli.js --config ./test/featuremap.config.json",
+    "test": "jest --json --outputFile=./test/jest-results.json",
+    "posttest": "npm run featuremap"
   },
   "author": "",
   "license": "ISC",
@@ -24,9 +30,10 @@
     "@types/lodash": "^4.14.168",
     "@types/node": "^14.14.35",
     "@types/yaml": "^1.9.7",
-    "jest": "^26.6.3"
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.3"
   },
   "bin": {
-    "feature-map": "./cli.js"
+    "featuremap": "./cli.js"
   }
 }

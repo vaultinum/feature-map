@@ -1,7 +1,7 @@
 {
-    "$id": "https://github.com/vaultinum/feature-map/feature-map.schema.json",
+    "$id": "https://raw.githubusercontent.com/vaultinum/feature-map/main/featuremap.schema.json",
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "Feature-Map",
+    "title": "Feature Map",
     "description": "A feature-map describing the list of features for a given product",
     "type": "object",
     "properties": {
