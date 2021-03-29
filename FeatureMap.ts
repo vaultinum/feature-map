@@ -30,6 +30,7 @@ export enum Criticity {
 export interface FeatureMap {
     productName: string, 
     description?: string,
+    createdAt: Date,
     features: {
         [key: string]: Feature
     }

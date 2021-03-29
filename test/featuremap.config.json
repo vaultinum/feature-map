@@ -7,6 +7,6 @@
     },
     "bindTests" : {
         "target": "jest",
-        "inputFile": "jest-results.json"
+        "inputFile": "./test/jest-results.json"
     }
 }

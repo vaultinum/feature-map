@@ -1,3 +1,4 @@
+// GENERATED CODE - DO NOT MODIFY
 export const ExampleProductFeatureMap = {
     Authentication: {
         $name: "Authentication",

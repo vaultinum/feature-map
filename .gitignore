@@ -4,3 +4,5 @@
 *.d.ts
 !jest.config.js
 featuremap.json
+/coverage
+jest-results.json

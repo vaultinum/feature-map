@@ -4,8 +4,8 @@ import { existsSync, readFileSync, writeFileSync, mkdirSync } from "fs"
 import { program } from "commander"
 import { FeatureMapConfig } from "./FeatureMapConfig"
 import { FeatureMap } from "./FeatureMap"
-import { toSafeProperty, buildFeatureMapObject } from "./FeatureMapBuilder"
-import { bindJestResults } from "./FeatureMapJestTestsBinder"
+import { loadConnectors } from "./connectors"
+import { bindTestResults, buildFeatureMapObject } from "./ConnectorService"
 
 const defaultFeatureMapConfig: FeatureMapConfig = {
     debug: false,
@@ -27,12 +27,13 @@ program
 program.parse(process.argv);
 const options = program.opts();
 
+loadConnectors();
 // 1. Load configuration
 const configFilePath = options.config;
 let config = defaultFeatureMapConfig;
-if(!existsSync(configFilePath)) {
+if (!existsSync(configFilePath)) {
     console.log(`No configuration file provided: using default config`);
-}else{
+} else {
     console.log(`Using featuremap configuration file: ${configFilePath}`);
     const configFromFile = JSON.parse(readFileSync(configFilePath).toString());
     config = {
@@ -41,14 +42,14 @@ if(!existsSync(configFilePath)) {
     }
 }
 const { debug } = config;
-if(debug) {
+if (debug) {
     console.log(`Configuration used: ${JSON.stringify(config, null, 4)}`);
 }
 
 // 2. Ensure featuremap.yaml exits
-if(!existsSync(config.featuremap)){
+if (!existsSync(config.featuremap)) {
     console.error(`Could not find feature map file: ${config.featuremap}`);
-    process.exit(1);
+    process.exit(0);
 }
 
 // 3. Read feature-map yaml file
@@ -57,51 +58,41 @@ const featureMapFile = readFileSync(config.featuremap, "utf8");
 let featureMap: FeatureMap = YAML.parse(featureMapFile);
 
 // 4. Ensure output folder exists
-if(config.outputFolder) {  
-    if(!existsSync(config.outputFolder)){
+if (config.outputFolder) {
+    if (!existsSync(config.outputFolder)) {
         mkdirSync(config.outputFolder, { recursive: true });
     }
-}else{
+} else {
     console.error("No output folder path provided");
-    process.exit(1);
+    process.exit(0);
 }
 
 // 5. Check if featuremap object building is required
-if(config.buildObject) {
-    // 5.1 Convert yaml file to Object
-    const featureMapObjectCode = buildFeatureMapObject(featureMap);
-    if (options.debug) {
-        console.log(featureMapObjectCode);
-    }
-    // 5.2 Write object to file
-    mkdirSync(config.outputFolder, { recursive: true });
-    if(config.buildObject.target === "typescript") {
-        const outputFile = `${config.outputFolder}/${toSafeProperty(featureMap.productName)}FeatureMap.ts`
-        console.log(`Creating feature-map object file: ${outputFile}`);
-        writeFileSync(outputFile, featureMapObjectCode);
-    }else{
-        console.error(`Unkown object output target: ${config.buildObject.target}`);
+if (config.buildObject) {
+    try{
+        if (config.buildObject.target === "typescript") {
+            // 5.1 Create output folder if needed
+            mkdirSync(config.outputFolder, { recursive: true });
+            // 5.2 Convert yaml file to Object
+            buildFeatureMapObject(config.buildObject.target, featureMap, config.outputFolder);
+        }
+    }catch(e){
+        console.error(`Failed to build featuremap object: ${e}`);
+        process.exit(0);
     }
 }
 
 // 6. Check if test binding is required
-if(config.bindTests) {
-    // 6.1 Check file path and target
-    if (config.bindTests.inputFile) {
-        if(existsSync(config.bindTests.inputFile)){
-            if(config.bindTests.target === "jest"){
-                // 6.2 Read Jest test results and combine with FeatureMap
-                console.log(`Using ${config.bindTests.target} test results file: ${config.bindTests.inputFile}`);
-                const jestTestResults = JSON.parse(readFileSync(config.bindTests.inputFile, "utf8"));
-                featureMap = bindJestResults(featureMap, jestTestResults);
-            }else{
-                console.error(`Unsupported test result target: ${config.bindTests.target}`);
-            }
-        }else{
-            console.error(`Could not find test results input file: ${config.bindTests.inputFile}`);    
-        }
-    }else{
-        console.error(`Missing test results input file path`);
+if (config.bindTests) {
+    try {
+        if (!config.bindTests.target) throw new Error("Missing bind test target");
+        if (!config.bindTests.inputFile) throw new Error(`Missing test results input file path`);
+        if (!existsSync(config.bindTests.inputFile)) throw new Error(`Could not find test results input file: ${config.bindTests.inputFile}`);
+        // 6.1 Read test results and combine with FeatureMap
+        featureMap = bindTestResults(config.bindTests.target, featureMap, config.bindTests.inputFile);
+    } catch (e) {
+        console.error(`Failed to bind test: ${e}`);
+        process.exit(0);
     }
 }
 

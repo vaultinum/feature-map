@@ -1,4 +1,18 @@
-# How to use feature-map 
+# What is a feature-map?
+
+As it's name implies, the featuremap of a product is a listing of all its available features. It is aimed to be read and understood by anyone with some knowledge of the product. 
+
+The feature-map is aimed to be a centralised view of what a product has to offer. Individual repositories part of the product can then bind their tests to provide more details and context to each feature. 
+
+Rules to follow when writing your feature-map: 
+* Name your features as you normally explains them to clients or management, not internal code names
+* Stay high-level, feature details such as edit/delete will likely be covered by individual tests
+
+# How it works
+
+![Workflow diagram](workflow-diagram.png)
+
+# How to install and use
 
 Install the feature-map dependency: 
 ```
