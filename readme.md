@@ -24,7 +24,7 @@ Create a `featuremap.yaml` definition file
 Create a `featuremap.config.json` file if you need to overwrite teh default settings.
 
 Update your `package.json` file with:
-```json
+```jsonc
 "scripts": {
     "build:featuremap": "featuremap", // Builds the FeaturemapProject.ts file and featuremap.json
     "test": "jest --json --outputFile=./test/jest-results.json",
