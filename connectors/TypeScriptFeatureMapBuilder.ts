@@ -1,6 +1,6 @@
+import { writeFileSync } from "fs";
 import * as indentString from "indent-string";
 import { camelCase, upperFirst } from "lodash";
-import { writeFileSync } from "fs";
 import { Connector } from "../Connector";
 import { Feature, FeatureMap } from "../FeatureMap";
 
@@ -23,7 +23,7 @@ const createFeatureString = (featureName: string, feature?: Feature): string => 
 
 export const buildFeatureMapObject = (featureMap: FeatureMap): string => {
     return `// GENERATED CODE - DO NOT MODIFY
-${createConstantString(`${featureMap.productName}FeatureMap`, 
+${createConstantString(`${featureMap.productName}FeatureMap`,
     Object
         .keys(featureMap.features)
         .map( featureName => [toSafeProperty(featureName), createFeatureString(featureName, featureMap.features[featureName])])
