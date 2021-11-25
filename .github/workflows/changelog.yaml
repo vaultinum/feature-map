@@ -7,7 +7,7 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     env:
       NPM_PACKAGE_ACCESS: ${{ secrets.NPM_PACKAGE_ACCESS }}
       NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -28,5 +28,5 @@ jobs:
         run: npm run release
       - name: Commit and push tag
         run: git push --follow-tags origin master
-      - name: Publish # A push from a github action doesn't trigger subsequent actions so publish.yml is not used
+      - name: Publish
         run: npm publish
