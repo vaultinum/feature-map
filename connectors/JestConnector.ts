@@ -5,16 +5,19 @@ import { Feature, FeatureMap, TestCase, TestStatus } from "../FeatureMap";
 import { Jest } from "./JestTestResults";
 
 const mapStatus = (status: Jest.TestStatus): TestStatus => {
-    switch(status){
-        case Jest.TestStatus.failed: return TestStatus.failed;
-        case Jest.TestStatus.passed: return TestStatus.passed;
-        default: return TestStatus.failed;
+    switch (status) {
+        case Jest.TestStatus.failed:
+            return TestStatus.failed;
+        case Jest.TestStatus.passed:
+            return TestStatus.passed;
+        default:
+            return TestStatus.failed;
     }
-}
+};
 
 const bindJestResultsToFeature = (path: string[], feature: Feature, testResults: Jest.AssertionResult[]): Feature => {
     const tests: TestCase[] = testResults
-        .filter( testResult => isEqual(testResult.ancestorTitles, path))
+        .filter(testResult => isEqual(testResult.ancestorTitles, path))
         .map(testResult => ({
             name: testResult.title,
             status: mapStatus(testResult.status)
@@ -23,8 +26,8 @@ const bindJestResultsToFeature = (path: string[], feature: Feature, testResults:
         ...feature,
         features: mapValues(feature.features, (subFeature, subFeatureName) => bindJestResultsToFeature([...path, subFeatureName], subFeature, testResults)),
         tests
-    }
-}
+    };
+};
 
 const jestConnector: Connector = {
     name: "jest",
@@ -37,6 +40,6 @@ const jestConnector: Connector = {
             features: mapValues(featureMap.features, (feature, featureName) => bindJestResultsToFeature([featureName], feature, testResults))
         };
     }
-}
+};
 
 export default jestConnector;

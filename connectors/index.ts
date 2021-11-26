@@ -7,4 +7,4 @@ export const loadConnectors = () => {
     addConnector(jestConnector);
     addConnector(mochawesomeConnector);
     addConnector(typeScriptConnector);
-}
+};

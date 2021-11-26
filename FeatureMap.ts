@@ -5,20 +5,20 @@ export enum TestStatus {
     notImplemented = "not-implemented"
 }
 
-export interface TestCase{
-    name: string,
-    status: TestStatus,
-    executedAt?: Date,
-    filePath?: string
+export interface TestCase {
+    name: string;
+    status: TestStatus;
+    executedAt?: Date;
+    filePath?: string;
 }
 
 export interface Feature {
     criticity: Criticity;
-    description?: string,
+    description?: string;
     features?: {
-        [key: string]: Feature
-    },
-    tests?: TestCase[]
+        [key: string]: Feature;
+    };
+    tests?: TestCase[];
 }
 
 export enum Criticity {
@@ -28,10 +28,10 @@ export enum Criticity {
 }
 
 export interface FeatureMap {
-    productName: string, 
-    description?: string,
-    createdAt: Date,
+    productName: string;
+    description?: string;
+    createdAt: Date;
     features: {
-        [key: string]: Feature
-    }
+        [key: string]: Feature;
+    };
 }

@@ -3,19 +3,20 @@ name: Publish Release
 on:
   release:
     types: [published, edited]
-  
+
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      NPM_PACKAGE_ACCESS: ${{ secrets.NPM_PACKAGE_ACCESS }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-        with: 
+        with:
           node-version: 12
           registry-url: 'https://npm.pkg.github.com/'
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Build
         run: npm run build
       - name: Publish

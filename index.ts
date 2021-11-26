@@ -1,1 +1,1 @@
-export * from "./FeatureMap"
+export * from "./FeatureMap";

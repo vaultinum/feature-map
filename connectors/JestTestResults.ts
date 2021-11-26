@@ -4,30 +4,30 @@ export namespace Jest {
         pending = "pending",
         passed = "passed"
     }
-    
+
     export interface AssertionResult {
-        fullName: string,
-        status: TestStatus,
-        title: string
-        ancestorTitles: string[],
-        failureMessages: string[],
+        fullName: string;
+        status: TestStatus;
+        title: string;
+        ancestorTitles: string[];
+        failureMessages: string[];
         location: null | {
-            column: number,
-            line: number
-        }
+            column: number;
+            line: number;
+        };
     }
-    
+
     export interface TestResult {
-        assertionResults: AssertionResult[],
-        endTime: number,
-        message: string,
-        name: string,
-        startTime: number,
-        status: TestStatus,
-        summary: string
+        assertionResults: AssertionResult[];
+        endTime: number;
+        message: string;
+        name: string;
+        startTime: number;
+        status: TestStatus;
+        summary: string;
     }
-    
+
     export interface ExecutionResults {
-        testResults: TestResult[]
+        testResults: TestResult[];
     }
 }

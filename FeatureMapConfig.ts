@@ -1,12 +1,12 @@
 export interface FeatureMapConfig {
-    debug: boolean,
-    featuremap: string,
-    outputFolder: string,
+    debug: boolean;
+    featuremap: string;
+    outputFolder: string;
     buildObject?: {
-        target?: string
-    },
+        target?: string;
+    };
     bindTests?: {
-        target?: string,
-        inputFile?: string
-    }
+        target?: string;
+        inputFile?: string;
+    };
 }

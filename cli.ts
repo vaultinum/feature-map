@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-import * as YAML from "yaml"
-import { existsSync, readFileSync, writeFileSync, mkdirSync } from "fs"
-import { program } from "commander"
-import { FeatureMapConfig } from "./FeatureMapConfig"
-import { FeatureMap } from "./FeatureMap"
-import { loadConnectors } from "./connectors"
-import { bindTestResults, buildFeatureMapObject } from "./ConnectorService"
+import * as YAML from "yaml";
+import { existsSync, readFileSync, writeFileSync, mkdirSync } from "fs";
+import { program } from "commander";
+import { FeatureMapConfig } from "./FeatureMapConfig";
+import { FeatureMap } from "./FeatureMap";
+import { loadConnectors } from "./connectors";
+import { bindTestResults, buildFeatureMapObject } from "./ConnectorService";
 
 const defaultFeatureMapConfig: FeatureMapConfig = {
     debug: false,
@@ -18,11 +18,9 @@ const defaultFeatureMapConfig: FeatureMapConfig = {
         target: "jest",
         inputFile: "jest-results.json"
     }
-}
+};
 
-program
-    .option("--config <featuremap config file>", "FeatureMap configuration", "./featuremap.config.json")
-    .option("--debug", "Display debug information");
+program.option("--config <featuremap config file>", "FeatureMap configuration", "./featuremap.config.json").option("--debug", "Display debug information");
 
 program.parse(process.argv);
 const options = program.opts();
@@ -39,7 +37,7 @@ if (!existsSync(configFilePath)) {
     config = {
         ...defaultFeatureMapConfig,
         ...configFromFile
-    }
+    };
 }
 const { debug } = config;
 if (debug) {
@@ -69,14 +67,14 @@ if (config.outputFolder) {
 
 // 5. Check if featuremap object building is required
 if (config.buildObject) {
-    try{
+    try {
         if (config.buildObject.target === "typescript") {
             // 5.1 Create output folder if needed
             mkdirSync(config.outputFolder, { recursive: true });
             // 5.2 Convert yaml file to Object
             buildFeatureMapObject(config.buildObject.target, featureMap, config.outputFolder);
         }
-    }catch(e){
+    } catch (e) {
         console.error(`Failed to build featuremap object: ${e}`);
         process.exit(0);
     }
