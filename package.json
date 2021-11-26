@@ -12,7 +12,8 @@
     "featuremap": "node cli.js --config ./test/featuremap.config.json",
     "test": "jest --json --outputFile=./test/jest-results.json",
     "posttest": "npm run featuremap",
-    "release": "standard-version"
+    "release": "standard-version",
+    "prepare": "husky install"
   },
   "author": "",
   "license": "ISC",
@@ -28,8 +29,12 @@
     "@types/lodash": "4.14.177",
     "@types/node": "16.11.7",
     "@types/yaml": "1.9.7",
+    "@vaultinum/prettier-config": "1.0.1",
     "cz-conventional-changelog": "3.3.0",
+    "husky": "7.0.4",
     "jest": "27.3.1",
+    "prettier": "2.5.0",
+    "pretty-quick": "3.1.2",
     "standard-version": "9.3.1",
     "ts-jest": "27.0.7"
   },
@@ -40,5 +45,6 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  }
+  },
+  "prettier": "@vaultinum/prettier-config"
 }

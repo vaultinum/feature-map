@@ -1,0 +1,15 @@
+# Ignore artifacts:
+dist
+build
+coverage
+
+# Ignore files:
+*.html
+*.json
+*.yaml
+*.yml
+*.d.ts
+*.md
+*.js
+*.js.map
+.eslintrc
