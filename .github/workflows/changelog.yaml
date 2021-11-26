@@ -1,0 +1,34 @@
+name: Build, generate changelog & publish
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      NPM_PACKAGE_ACCESS: ${{ secrets.NPM_PACKAGE_ACCESS }}
+      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: master
+      - uses: fregante/setup-git-user@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+          registry-url: "https://npm.pkg.github.com/"
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      # Do not publish automatically while this project is in progress
+      #- name: Generate changelog
+      #  run: npm run release
+      #- name: Commit and push tag
+      #  run: git push --follow-tags origin master
+      #- name: Publish
+      #  run: npm publish
