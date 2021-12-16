@@ -10,8 +10,8 @@ const objectToString = (properties: [string, string?][], prefix?: string): strin
 ${properties.filter(([key, value]) => value !== undefined).map(([key, value]) => indentString(`${key}: ${value}`, 4)).join(",\n")}
 }`;
 
-const createConstantString = (constantName: string, properties: [string, string][]): string => {
-    return objectToString(properties, `export const ${toSafeProperty(constantName)} = `);
+const createDefaultExportString = (properties: [string, string][]): string => {
+    return objectToString(properties, "export default = ");
 }
 
 const createFeatureString = (featureName: string, feature?: Feature): string => {
@@ -23,10 +23,9 @@ const createFeatureString = (featureName: string, feature?: Feature): string => 
 
 export const buildFeatureMapObject = (featureMap: FeatureMap): string => {
     return `// GENERATED CODE - DO NOT MODIFY
-${createConstantString(`${featureMap.productName}FeatureMap`,
-    Object
-        .keys(featureMap.features)
-        .map( featureName => [toSafeProperty(featureName), createFeatureString(featureName, featureMap.features[featureName])])
+${createDefaultExportString(Object
+    .keys(featureMap.features)
+    .map(featureName => [toSafeProperty(featureName), createFeatureString(featureName, featureMap.features[featureName])])
 )}`;
 }
 
